@@ -25,8 +25,7 @@ router.get('/robots', function(req, res, next) {
 
 router.get('/robots/:id', function(req, res, next) {
   var robotId = req.params.id;
-  var robot = myRobots.find(function(robot){ return robot._id == robotId }) // use static hard-coded data for now
-
+  var errorMessage = `OOPS - COULDN'T FIND ROBOT ${robotId}`
   var url = `https://southernct-443-robots-api.herokuapp.com/api/robots/${robotId}.json`
 
   fetch(url)
@@ -36,9 +35,12 @@ router.get('/robots/:id', function(req, res, next) {
           console.log("SHOWING ROBOT", json)
           res.render('robots/show', {robot: json, title: `Robot ${robotId}`});
         })
+        .catch(function(err){
+          console.log("JSON PARSE ERROR", err)
+          res.send(errorMessage)
+        })
     })
     .catch(function(err){
-      var errorMessage = `OOPS - COULDN'T FIND ROBOT ${robotId}`
       console.log(errorMessage)
       res.send(errorMessage)
     })
