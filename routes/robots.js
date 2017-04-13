@@ -3,7 +3,7 @@ var router = express.Router()
 var fetch = require('node-fetch')
 
 var baseUrl
-if (true == true) {
+if (true == false) {
   baseUrl = "http://localhost:3003"
 } else {
   baseUrl = "https://southernct-443-robots-api.herokuapp.com"

@@ -9,7 +9,7 @@
 
     <a href="/robots"><%= "<< back" %></a>
 
-    <form id="new-robot-form">
+    <form id="new-robot-form" action="<%= formAction %>" method="<%= formMethod %>">
       <label for="name">Name</label>
       <input id="name" name="name" type="text" placeholder="My Robot">
       <br>
@@ -19,7 +19,7 @@
       <button id="submit" type="submit">Submit</button>
     </form>
 
-    <!--script src="https://code.jquery.com/jquery-3.2.1.min.js"></script-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
 
       const formMethod = "<%= formMethod %>"
@@ -36,6 +36,49 @@
         const requestUrl = formAction
         const formData = {name: inputName.value, description: inputDescription.value}
         console.log("SUBMITTING", formData)
+
+        $.post(requestUrl, formData, function(response, status){
+          console.log(response, status)
+        })
+        .done(function() {
+          window.location = '/robots';
+          return false;
+        })
+        .fail(function(err){
+          alert("ERROR", err)
+          return false;
+        })
+
+
+
+
+
+
+        //const requestOptions = {
+        //  method: formMethod,
+        //  headers: {'Accept':'application/json', 'Content-Type':'application/json'},
+        //  body: JSON.stringify(formData)
+        //}
+
+        //fetch(requestUrl, requestOptions).then(function(response) {
+        //  if (response.type === 'opaque') {
+        //    alert('Received a response, but it\'s opaque so can\'t examine it');
+        //    return
+        //  }
+//
+        //  if (response.status !== 200) {
+        //    alert('Looks like there was a problem. Status Code: ', response.status);
+        //    return
+        //  }
+//
+        //  // Examine the text in the response
+        //  response.text().then(function(responseText) {
+        //    alert(responseText)
+        //  });
+        //}).catch(function(err) {
+        //  alert('Fetch Error :-S', err);
+        //})
+
 
         //$.post(requestUrl, formData, function(response, status){
         //  alert("WHAT")
@@ -59,22 +102,41 @@
 
 
 
-        const requestOptions = {
-          method: formMethod,
-          headers: {'Accept':'application/json', 'Content-Type':'application/json'},
-          body: JSON.stringify(formData)
-        }
+        //const requestOptions = {
+        //  method: formMethod,
+        //  headers: {'Accept':'application/json', 'Content-Type':'application/json'},
+        //  body: JSON.stringify(formData)
+        //}
 
-        fetch(requestUrl, requestOptions)
-          .then(json)
-          .then(function (data) {
-            debugger
-            console.log('Request succeeded with JSON response', data);
-          })
-          .catch(function (error) {
-            debugger
-            console.log('Request failed', error);
-          })
+
+        //fetch(requestUrl, requestOptions).then(function(response) {
+        //  console.log(response)
+        //  response.json().then(function(json){
+        //    console.log("SHOWING ROBOT", json)
+        //    //window.location = '/robots'
+        //    //return false
+        //    debugger
+        //  })
+        //}).catch(function(err){
+        //  //debugger
+        //  window.location = '/robots'
+        //  //console.log("ERR",err)
+        //})
+
+
+
+
+
+        //fetch(requestUrl, requestOptions)
+        //  .then(json)
+        //  .then(function (data) {
+        //    debugger
+        //    console.log('Request succeeded with JSON response', data);
+        //  })
+        //  .catch(function (error) {
+        //    debugger
+        //    console.log('Request failed', error);
+        //  })
 
           //.then(function(response) {
           //  console.log("RESPONSE", response)
