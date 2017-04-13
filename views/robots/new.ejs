@@ -32,7 +32,9 @@
 
       submitButton.addEventListener("click", submitForm, false)
 
-      function submitForm() {
+      function submitForm(event) {
+        event.preventDefault() // prevent duplicate form submission!
+
         const requestUrl = formAction
         const formData = {name: inputName.value, description: inputDescription.value}
         console.log("SUBMITTING", formData)
@@ -41,12 +43,16 @@
           console.log(response, status)
         })
         .done(function() {
-          window.location = '/robots';
-          return false;
+          window.location = '/robots'
         })
-        .fail(function(err){
-          alert("ERROR", err)
-          return false;
+        .fail(function(xhr, status, error){
+          var response = xhr.responseJSON
+          var errorName = response.message.name
+          var errorMessage = response.message.message
+          var formData = response.robotData
+
+          console.log(errorName, errorMessage, formData)
+          alert(`${errorName}: ${errorMessage}. Please make sure to specify all required values.`)
         })
 
 

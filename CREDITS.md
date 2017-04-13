@@ -8,3 +8,5 @@
   + http://stackoverflow.com/a/3188383/670433
 
 action="<%= formAction %>" method="<%= formMethod %>"
+
+curl --data "param1=value1&param2=value2" https://example.com/resource.cgi
