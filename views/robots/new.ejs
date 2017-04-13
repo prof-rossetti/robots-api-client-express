@@ -39,140 +39,47 @@
         const formData = {name: inputName.value, description: inputDescription.value}
         console.log("SUBMITTING", formData)
 
-        $.post(requestUrl, formData)
-          .done(function(data, textStatus, xhr) {
-            window.location = '/robots'
-          })
-          .fail(function(xhr, textStatus, errorThrown){
-            var response = xhr.responseJSON
-            var errorName = response.message.name
-            var errorMessage = response.message.message
-            var formData = response.robotData
-            console.log(errorName, errorMessage, formData)
-            alert(`${errorName}: ${errorMessage}. Please make sure to specify all required values.`)
-          })
+        //
+        // Using fetch
+        //
 
+        const requestOptions = {
+          method: formMethod,
+          headers: {'Accept':'application/json', 'Content-Type':'application/json'},
+          body: JSON.stringify(formData)
+        }
 
+        fetch(requestUrl, requestOptions).then(function(response) {
+          if (response.ok) {
+            response.json().then(function(json){
+              window.location = '/robots'
+            })
+          } else {
+            alert("Validation Error. Please make sure to specify all required values.")
+          }
+        }).catch(function(err){
+          alert("Server Error. Maybe the API server is down or something. Try again in a few moments.")
+        })
 
+        //
+        // Using jQuery
+        //
 
-
-
-        //const requestOptions = {
-        //  method: formMethod,
-        //  headers: {'Accept':'application/json', 'Content-Type':'application/json'},
-        //  body: JSON.stringify(formData)
-        //}
-
-        //fetch(requestUrl, requestOptions).then(function(response) {
-        //  if (response.type === 'opaque') {
-        //    alert('Received a response, but it\'s opaque so can\'t examine it');
-        //    return
-        //  }
-//
-        //  if (response.status !== 200) {
-        //    alert('Looks like there was a problem. Status Code: ', response.status);
-        //    return
-        //  }
-//
-        //  // Examine the text in the response
-        //  response.text().then(function(responseText) {
-        //    alert(responseText)
-        //  });
-        //}).catch(function(err) {
-        //  alert('Fetch Error :-S', err);
-        //})
-
-
-        //$.post(requestUrl, formData, function(response, status){
-        //  alert("WHAT")
-        //  //debugger
-        //  //window.location = '/robots';
-        //})
-        //.done(function() {
-        //  debugger
-        //  //console.log("RESPONSE", json)
-        //  //window.location = '/robots';
-        //  //return false;
-        //})
-        //  .fail(function(err){
-        //    debugger
-        //    console.log("ERROR", err)
+        //$.post(requestUrl, formData)
+        //  .done(function(data, textStatus, xhr) {
+        //    window.location = '/robots'
+        //  })
+        //  .fail(function(xhr, textStatus, errorThrown){
+        //    var response = xhr.responseJSON
+        //    var errorName = response.message.name
+        //    var errorMessage = response.message.message
+        //    var formData = response.robotData
+        //    console.log(errorName, errorMessage, formData)
+        //    alert(`${errorName}: ${errorMessage}. Please make sure to specify all required values.`)
         //  })
 
 
-
-
-
-
-
-        //const requestOptions = {
-        //  method: formMethod,
-        //  headers: {'Accept':'application/json', 'Content-Type':'application/json'},
-        //  body: JSON.stringify(formData)
-        //}
-
-
-        //fetch(requestUrl, requestOptions).then(function(response) {
-        //  console.log(response)
-        //  response.json().then(function(json){
-        //    console.log("SHOWING ROBOT", json)
-        //    //window.location = '/robots'
-        //    //return false
-        //    debugger
-        //  })
-        //}).catch(function(err){
-        //  //debugger
-        //  window.location = '/robots'
-        //  //console.log("ERR",err)
-        //})
-
-
-
-
-
-        //fetch(requestUrl, requestOptions)
-        //  .then(json)
-        //  .then(function (data) {
-        //    debugger
-        //    console.log('Request succeeded with JSON response', data);
-        //  })
-        //  .catch(function (error) {
-        //    debugger
-        //    console.log('Request failed', error);
-        //  })
-
-          //.then(function(response) {
-          //  console.log("RESPONSE", response)
-          //  debugger
-//
-          //  response.json()
-          //    .then(function(json){
-          //      console.log("CREATED ROBOT", json)
-          //      debugger
-          //    })
-          //    .catch(function(err){
-          //      alert("ERROR", err)
-          //      debugger
-          //    })
-          //})
-          //.catch(function(err){
-          //  alert("ERROR", err)
-          //  //debugger
-          //  window.location = '/robots';
-          //  //return false;
-          //})
-
-        //window.location = '/robots';
-        //return false;
       }
-
-
-
-
-
-
-
-
 
     </script>
   </body>
