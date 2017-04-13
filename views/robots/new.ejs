@@ -39,21 +39,18 @@
         const formData = {name: inputName.value, description: inputDescription.value}
         console.log("SUBMITTING", formData)
 
-        $.post(requestUrl, formData, function(response, status){
-          console.log(response, status)
-        })
-        .done(function() {
-          window.location = '/robots'
-        })
-        .fail(function(xhr, status, error){
-          var response = xhr.responseJSON
-          var errorName = response.message.name
-          var errorMessage = response.message.message
-          var formData = response.robotData
-
-          console.log(errorName, errorMessage, formData)
-          alert(`${errorName}: ${errorMessage}. Please make sure to specify all required values.`)
-        })
+        $.post(requestUrl, formData)
+          .done(function(data, textStatus, xhr) {
+            window.location = '/robots'
+          })
+          .fail(function(xhr, textStatus, errorThrown){
+            var response = xhr.responseJSON
+            var errorName = response.message.name
+            var errorMessage = response.message.message
+            var formData = response.robotData
+            console.log(errorName, errorMessage, formData)
+            alert(`${errorName}: ${errorMessage}. Please make sure to specify all required values.`)
+          })
 
 
 

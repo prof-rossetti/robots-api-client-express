@@ -6,6 +6,7 @@
   + https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data
   + https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
   + http://stackoverflow.com/a/3188383/670433
+  + https://api.jquery.com/jQuery.ajax/#jqXHR
 
 action="<%= formAction %>" method="<%= formMethod %>"
 
