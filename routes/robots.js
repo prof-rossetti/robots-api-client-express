@@ -12,9 +12,9 @@ if (true == true) {
 /* LIST */
 
 router.get('/robots', function(req, res, next) {
-  const robotsEndpoint = `${baseUrl}/api/robots.json`
+  const endpointUrl = `${baseUrl}/api/robots.json`
 
-  fetch(robotsEndpoint).then(function(response) {
+  fetch(endpointUrl).then(function(response) {
     response.json().then(function(json){
       console.log("LISTING ROBOTS", json)
 
@@ -26,7 +26,13 @@ router.get('/robots', function(req, res, next) {
 /* NEW */
 
 router.get('/robots/new', function(req, res, next) {
-  res.render('robots/new', {baseUrl: baseUrl, title: "New Robot"});
+  const endpointUrl = `${baseUrl}/api/robots`
+
+  res.render('robots/new', {
+    title: "New Robot",
+    formAction: endpointUrl,
+    formMethod: "POST"
+  })
 })
 
 /* SHOW */

@@ -9,7 +9,15 @@
 
     <a href="/robots"><%= "< back" %></a>
 
-    <p>Form here</p>
+    <form id="new-robot-form" action="<%= formAction %>" method="<%= formMethod %>">
+      <label for="name">Name</label>
+      <input id="name" type="text" placeholder="My Robot">
+      <br>
+      <label for="description">Description</label>
+      <textarea id="description" rows="10" placeholder="Does all the things..."></textarea>
+      <br>
+      <button type="submit">Submit</button>
+    </form>
 
   </body>
 </html>
