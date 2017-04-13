@@ -7,17 +7,108 @@
   <body>
     <h1><%= title %></h1>
 
-    <a href="/robots"><%= "< back" %></a>
+    <a href="/robots"><%= "<< back" %></a>
 
-    <form id="new-robot-form" action="<%= formAction %>" method="<%= formMethod %>">
+    <form id="new-robot-form">
       <label for="name">Name</label>
       <input id="name" name="name" type="text" placeholder="My Robot">
       <br>
       <label for="description">Description</label>
       <textarea id="description" name="description" rows="10" placeholder="Does all the things..."></textarea>
       <br>
-      <button type="submit">Submit</button>
+      <button id="submit" type="submit">Submit</button>
     </form>
 
+    <!--script src="https://code.jquery.com/jquery-3.2.1.min.js"></script-->
+    <script type="text/javascript">
+
+      const formMethod = "<%= formMethod %>"
+      const formAction = "<%= formAction %>"
+      console.log("FORM WILL", formMethod, formAction)
+
+      var inputName = document.getElementById("name")
+      var inputDescription = document.getElementById("description")
+      var submitButton = document.getElementById("submit")
+
+      submitButton.addEventListener("click", submitForm, false)
+
+      function submitForm() {
+        const requestUrl = formAction
+        const formData = {name: inputName.value, description: inputDescription.value}
+        console.log("SUBMITTING", formData)
+
+        //$.post(requestUrl, formData, function(response, status){
+        //  alert("WHAT")
+        //  //debugger
+        //  //window.location = '/robots';
+        //})
+        //.done(function() {
+        //  debugger
+        //  //console.log("RESPONSE", json)
+        //  //window.location = '/robots';
+        //  //return false;
+        //})
+        //  .fail(function(err){
+        //    debugger
+        //    console.log("ERROR", err)
+        //  })
+
+
+
+
+
+
+
+        const requestOptions = {
+          method: formMethod,
+          headers: {'Accept':'application/json', 'Content-Type':'application/json'},
+          body: JSON.stringify(formData)
+        }
+
+        fetch(requestUrl, requestOptions)
+          .then(json)
+          .then(function (data) {
+            debugger
+            console.log('Request succeeded with JSON response', data);
+          })
+          .catch(function (error) {
+            debugger
+            console.log('Request failed', error);
+          })
+
+          //.then(function(response) {
+          //  console.log("RESPONSE", response)
+          //  debugger
+//
+          //  response.json()
+          //    .then(function(json){
+          //      console.log("CREATED ROBOT", json)
+          //      debugger
+          //    })
+          //    .catch(function(err){
+          //      alert("ERROR", err)
+          //      debugger
+          //    })
+          //})
+          //.catch(function(err){
+          //  alert("ERROR", err)
+          //  //debugger
+          //  window.location = '/robots';
+          //  //return false;
+          //})
+
+        //window.location = '/robots';
+        //return false;
+      }
+
+
+
+
+
+
+
+
+
+    </script>
   </body>
 </html>

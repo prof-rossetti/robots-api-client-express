@@ -16,7 +16,7 @@ router.get('/robots', function(req, res, next) {
 
   fetch(endpointUrl).then(function(response) {
     response.json().then(function(json){
-      console.log("LISTING ROBOTS", json)
+      console.log("LISTING ROBOTS", json.length)
 
       res.render('robots/index', {robots: json, title: "Robots List"});
     })
