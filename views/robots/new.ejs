@@ -104,12 +104,16 @@
           .header("Accept", "application/json")
           .header("Content-Type", "application/json")
           .on("error", function(error) {
-            var response = JSON.parse(error.srcElement.response)
-            var errorName = response.message.name
-            var errorMessage = response.message.message
-            var formData = response.robotData
-            console.log(errorName, errorMessage, formData)
-            alert(`${errorName}: ${errorMessage}. Please make sure to specify all required values.`)
+            if (error.srcElement.response) {
+              var response = JSON.parse(error.srcElement.response)
+              var errorName = response.message.name
+              var errorMessage = response.message.message
+              var formData = response.robotData
+              console.log(errorName, errorMessage, formData)
+              alert(`${errorName}: ${errorMessage}. Please make sure to specify all required values.`)
+            } else {
+              alert("Server Error. Maybe the API server is down or something. Try again in a few moments.")
+            }
           })
           .on("load", function(xhr) {
             console.log(xhr, xhr.status, xhr.response)
