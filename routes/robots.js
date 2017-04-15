@@ -53,6 +53,23 @@ router.get('/robots/:id', function(req, res, next) {
   })
 })
 
+/* EDIT */
 
+router.get('/robots/:id/edit', function(req, res, next) {
+  const robotId = req.params.id
+  const url = `${baseUrl}/api/robots/${robotId}.json`
+
+  fetch(url).then(function(response) {
+    response.json().then(function(json){
+      console.log("POPULATING FORM WITH ROBOT", json)
+      res.render('robots/edit', {
+        robot: json,
+        title: `Edit Robot ${robotId}`,
+        requestUrl: `${baseUrl}/api/robots/${robotId}`,
+        requestMethod: "PUT"
+      })
+    })
+  })
+})
 
 module.exports = router
