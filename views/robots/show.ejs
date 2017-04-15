@@ -12,18 +12,26 @@
     <button id="delete-robot">Delete</button>
 
     <script type="text/javascript">
-      var robot = <%- JSON.stringify(robot) %>
-      console.log("SHOWING ROBOT", robot)
-
       var deleteButton = document.getElementById("delete-robot")
 
       deleteButton.addEventListener("click", deleteRobot, false)
 
-      function deleteRobot(event) {
-        console.log("DELETING", event)
+      function deleteRobot() {
+        const requestUrl = "<%= requestUrl %>"
+        const requestOptions = {
+          method: "DELETE",
+          headers: {'Accept':'application/json', 'Content-Type':'application/json'}
+        }
 
-        // TODO: SEND DELETE REQUEST TO API SERVER
-
+        fetch(requestUrl, requestOptions).then(function(response) {
+          if (response.ok) {
+            window.location = '/robots'
+          } else {
+            alert("Destruction Error.")
+          }
+        }).catch(function(err){
+          alert("Server Error. Maybe the API server is down or something. Try again in a few moments.")
+        })
       }
     </script>
   </body>

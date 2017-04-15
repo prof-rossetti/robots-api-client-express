@@ -3,7 +3,7 @@ var router = express.Router()
 var fetch = require('node-fetch')
 
 var baseUrl
-if (true == false) {
+if (true == true) {
   baseUrl = "http://localhost:3003"
 } else {
   baseUrl = "https://southernct-443-robots-api.herokuapp.com"
@@ -44,7 +44,11 @@ router.get('/robots/:id', function(req, res, next) {
   fetch(url).then(function(response) {
     response.json().then(function(json){
       console.log("SHOWING ROBOT", json)
-      res.render('robots/show', {robot: json, title: `Robot ${robotId}`})
+      res.render('robots/show', {
+        robot: json,
+        title: `Robot ${robotId}`,
+        requestUrl: `${baseUrl}/api/robots/${robotId}`
+      })
     })
   })
 })
