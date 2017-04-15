@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <a href="/robots"><%= "<< back" %></a>
+
+    <form id="new-robot-form" action="<%= formAction %>" method="<%= formMethod %>">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="My Robot">
+      <br>
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="10" placeholder="Does all the things..."></textarea>
+      <br>
+      <button id="submit" type="submit">Submit</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script><!-- ONLY NECESSARY IF YOU'RE SENDING REQUESTS VIA jQUERY -->
+    <script src="https://d3js.org/d3.v4.min.js"></script><!-- ONLY NECESSARY IF YOU'RE SENDING REQUESTS VIA D3 -->
+    <script type="text/javascript">
+
+      const formMethod = "<%= formMethod %>"
+      const formAction = "<%= formAction %>"
+      console.log("FORM WILL", formMethod, formAction)
+
+      var inputName = document.getElementById("name")
+      var inputDescription = document.getElementById("description")
+      var submitButton = document.getElementById("submit")
+
+      submitButton.addEventListener("click", submitForm, false)
+
+      function submitForm(event) {
+        event.preventDefault() // prevent duplicate form submission!
+
+        const requestUrl = formAction
+        const formData = {name: inputName.value, description: inputDescription.value}
+        console.log("SUBMITTING", formData)
+
+        //
+        // Using fetch
+        //
+
+        //const requestOptions = {
+        //  method: formMethod,
+        //  headers: {'Accept':'application/json', 'Content-Type':'application/json'},
+        //  body: JSON.stringify(formData)
+        //}
+
+        //fetch(requestUrl, requestOptions).then(function(response) {
+        //  if (response.ok) {
+        //    response.json().then(function(json){
+        //      window.location = '/robots'
+        //    })
+        //  } else {
+        //    alert("Validation Error. Please make sure to specify all required values.")
+        //  }
+        //}).catch(function(err){
+        //  alert("Server Error. Maybe the API server is down or something. Try again in a few moments.")
+        //})
+
+
+        //
+        // Using jQuery
+        //
+
+        //$.post(requestUrl, formData)
+        //  .done(function(data, textStatus, xhr) {
+        //    window.location = '/robots'
+        //  })
+        //  .fail(function(xhr, textStatus, errorThrown){
+        //    var response = xhr.responseJSON
+        //    var errorName = response.message.name
+        //    var errorMessage = response.message.message
+        //    var formData = response.robotData
+        //    console.log(errorName, errorMessage, formData)
+        //    alert(`${errorName}: ${errorMessage}. Please make sure to specify all required values.`)
+        //  })
+
+
+        //
+        // Using D3
+        //
+
+        //d3.request(requestUrl)
+        //  .header("Accept", "application/json")
+        //  .header("Content-Type", "application/json")
+        //  .post(JSON.stringify(formData), function(error, xhr){
+        //    if (error) {
+        //      alert("Validation Error. Please make sure to specify all required values.")
+        //    } else if (xhr && xhr.status && xhr.status == 201) {
+        //      console.log(xhr, xhr.status, xhr.response)
+        //      window.location = '/robots'
+        //    } else {
+        //      debugger
+        //      alert("Server Error. Maybe the API server is down or something. Try again in a few moments.")
+        //    }
+        //  })
+
+        d3.request(requestUrl)
+          .header("Accept", "application/json")
+          .header("Content-Type", "application/json")
+          .on("error", function(error) {
+            if (error.srcElement.response) {
+              var response = JSON.parse(error.srcElement.response)
+              var errorName = response.message.name
+              var errorMessage = response.message.message
+              var formData = response.robotData
+              console.log(errorName, errorMessage, formData)
+              alert(`${errorName}: ${errorMessage}. Please make sure to specify all required values.`)
+            } else {
+              alert("Server Error. Maybe the API server is down or something. Try again in a few moments.")
+            }
+          })
+          .on("load", function(xhr) {
+            console.log(xhr, xhr.status, xhr.response)
+            window.location = '/robots'
+          })
+          .send("POST", JSON.stringify(formData))
+
+
+
+      }
+
+    </script>
+  </body>
+</html>
