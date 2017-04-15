@@ -44,7 +44,11 @@ router.get('/robots/:id', function(req, res, next) {
   fetch(url).then(function(response) {
     response.json().then(function(json){
       console.log("SHOWING ROBOT", json)
-      res.render('robots/show', {robot: json, title: `Robot ${robotId}`})
+      res.render('robots/show', {
+        robot: json,
+        title: `Robot ${robotId}`,
+        requestUrl: `${baseUrl}/api/robots/${robotId}`
+      })
     })
   })
 })

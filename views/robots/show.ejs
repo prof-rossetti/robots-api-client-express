@@ -9,5 +9,30 @@
 
     <p><%= robot.name %> - <%= robot.description %></p>
 
+    <button id="delete-robot">Delete</button>
+
+    <script type="text/javascript">
+      var deleteButton = document.getElementById("delete-robot")
+
+      deleteButton.addEventListener("click", deleteRobot, false)
+
+      function deleteRobot() {
+        const requestUrl = "<%= requestUrl %>"
+        const requestOptions = {
+          method: "DELETE",
+          headers: {'Accept':'application/json', 'Content-Type':'application/json'}
+        }
+
+        fetch(requestUrl, requestOptions).then(function(response) {
+          if (response.ok) {
+            window.location = '/robots'
+          } else {
+            alert("Destruction Error.")
+          }
+        }).catch(function(err){
+          alert("Server Error. Maybe the API server is down or something. Try again in a few moments.")
+        })
+      }
+    </script>
   </body>
 </html>

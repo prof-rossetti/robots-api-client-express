@@ -11,3 +11,6 @@
 action="<%= formAction %>" method="<%= formMethod %>"
 
 curl --data "param1=value1&param2=value2" https://example.com/resource.cgi
+
+  + http://stackoverflow.com/a/16098699/670433
+
