@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+
+    <a href="/robots/<%= robot._id %>"><%= "<< back" %></a>
+
+    <form id="edit-robot-form" action="<%= requestUrl %>" method="<%= requestMethod %>">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="My Robot">
+      <br>
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="10" placeholder="Does all the things..."></textarea>
+      <br>
+      <button id="submit" type="submit">Submit</button>
+    </form>
+
+    <script type="text/javascript">
+
+      const requestMethod = "<%= requestMethod %>"
+      const requestUrl = "<%= requestUrl %>"
+      console.log("FORM WILL", requestMethod, requestUrl)
+
+/*
+      var inputName = document.getElementById("name")
+      var inputDescription = document.getElementById("description")
+      var submitButton = document.getElementById("submit")
+
+      submitButton.addEventListener("click", submitForm, false)
+
+      function submitForm(event) {
+        event.preventDefault() // prevent duplicate form submission!
+
+        const requestUrl = formAction
+        const formData = {name: inputName.value, description: inputDescription.value}
+        console.log("SUBMITTING", formData)
+
+        //
+        // Using fetch
+        //
+
+        //const requestOptions = {
+        //  method: formMethod,
+        //  headers: {'Accept':'application/json', 'Content-Type':'application/json'},
+        //  body: JSON.stringify(formData)
+        //}
+
+        //fetch(requestUrl, requestOptions).then(function(response) {
+        //  if (response.ok) {
+        //    response.json().then(function(json){
+        //      window.location = '/robots'
+        //    })
+        //  } else {
+        //    alert("Validation Error. Please make sure to specify all required values.")
+        //  }
+        //}).catch(function(err){
+        //  alert("Server Error. Maybe the API server is down or something. Try again in a few moments.")
+        //})
+
+      }
+
+*/
+
+
+    </script>
+  </body>
+</html>

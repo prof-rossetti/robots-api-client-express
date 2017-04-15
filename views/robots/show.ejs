@@ -9,6 +9,10 @@
 
     <p><%= robot.name %> - <%= robot.description %></p>
 
+    <a href="/robots/<%= robot._id %>/edit">
+      <button>Edit</button>
+    </a>
+
     <button id="delete-robot">Delete</button>
 
     <script type="text/javascript">
