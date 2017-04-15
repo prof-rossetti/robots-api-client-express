@@ -72,9 +72,4 @@ router.get('/robots/:id/edit', function(req, res, next) {
   })
 })
 
-
-
-
-
-
 module.exports = router
