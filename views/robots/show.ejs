@@ -9,5 +9,22 @@
 
     <p><%= robot.name %> - <%= robot.description %></p>
 
+    <button id="delete-robot">Delete</button>
+
+    <script type="text/javascript">
+      var robot = <%- JSON.stringify(robot) %>
+      console.log("SHOWING ROBOT", robot)
+
+      var deleteButton = document.getElementById("delete-robot")
+
+      deleteButton.addEventListener("click", deleteRobot, false)
+
+      function deleteRobot(event) {
+        console.log("DELETING", event)
+
+        // TODO: SEND DELETE REQUEST TO API SERVER
+
+      }
+    </script>
   </body>
 </html>
