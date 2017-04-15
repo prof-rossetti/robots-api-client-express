@@ -11,10 +11,10 @@
 
     <form id="edit-robot-form" action="<%= requestUrl %>" method="<%= requestMethod %>">
       <label for="name">Name</label>
-      <input id="name" name="name" type="text" placeholder="My Robot">
+      <input id="name" name="name" type="text" placeholder="My Robot" value="<%= robot.name %>">
       <br>
       <label for="description">Description</label>
-      <textarea id="description" name="description" rows="10" placeholder="Does all the things..."></textarea>
+      <textarea id="description" name="description" rows="10" placeholder="Does all the things..."><%= robot.description %></textarea>
       <br>
       <button id="submit" type="submit">Submit</button>
     </form>
