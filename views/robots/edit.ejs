@@ -20,12 +20,10 @@
     </form>
 
     <script type="text/javascript">
-
       const requestMethod = "<%= requestMethod %>"
       const requestUrl = "<%= requestUrl %>"
       console.log("FORM WILL", requestMethod, requestUrl)
 
-/*
       var inputName = document.getElementById("name")
       var inputDescription = document.getElementById("description")
       var submitButton = document.getElementById("submit")
@@ -35,36 +33,27 @@
       function submitForm(event) {
         event.preventDefault() // prevent duplicate form submission!
 
-        const requestUrl = formAction
         const formData = {name: inputName.value, description: inputDescription.value}
         console.log("SUBMITTING", formData)
 
-        //
-        // Using fetch
-        //
+        const requestOptions = {
+          method: requestMethod,
+          headers: {'Accept':'application/json', 'Content-Type':'application/json'},
+          body: JSON.stringify(formData)
+        }
 
-        //const requestOptions = {
-        //  method: formMethod,
-        //  headers: {'Accept':'application/json', 'Content-Type':'application/json'},
-        //  body: JSON.stringify(formData)
-        //}
-
-        //fetch(requestUrl, requestOptions).then(function(response) {
-        //  if (response.ok) {
-        //    response.json().then(function(json){
-        //      window.location = '/robots'
-        //    })
-        //  } else {
-        //    alert("Validation Error. Please make sure to specify all required values.")
-        //  }
-        //}).catch(function(err){
-        //  alert("Server Error. Maybe the API server is down or something. Try again in a few moments.")
-        //})
-
+        fetch(requestUrl, requestOptions).then(function(response) {
+          if (response.ok) {
+            response.json().then(function(json){
+              window.location = '/robots'
+            })
+          } else {
+            alert("Validation Error. Please make sure to specify all required values.")
+          }
+        }).catch(function(err){
+          alert("Server Error. Maybe the API server is down or something. Try again in a few moments.")
+        })
       }
-
-*/
-
 
     </script>
   </body>
