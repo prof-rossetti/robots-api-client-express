@@ -12,7 +12,7 @@ if (true == false) {
 /* LIST */
 
 router.get('/robots', function(req, res, next) {
-  const endpointUrl = `${baseUrl}/api/robots.json`
+  const endpointUrl = `${baseUrl}/api/robots`
 
   fetch(endpointUrl).then(function(response) {
     response.json().then(function(json){
@@ -39,7 +39,7 @@ router.get('/robots/new', function(req, res, next) {
 
 router.get('/robots/:id', function(req, res, next) {
   const robotId = req.params.id
-  const url = `${baseUrl}/api/robots/${robotId}.json`
+  const url = `${baseUrl}/api/robots/${robotId}`
 
   fetch(url).then(function(response) {
     response.json().then(function(json){
@@ -47,7 +47,7 @@ router.get('/robots/:id', function(req, res, next) {
       res.render('robots/show', {
         robot: json,
         title: `Robot ${robotId}`,
-        requestUrl: `${baseUrl}/api/robots/${robotId}`
+        requestUrl: url
       })
     })
   })
@@ -57,7 +57,7 @@ router.get('/robots/:id', function(req, res, next) {
 
 router.get('/robots/:id/edit', function(req, res, next) {
   const robotId = req.params.id
-  const url = `${baseUrl}/api/robots/${robotId}.json`
+  const url = `${baseUrl}/api/robots/${robotId}`
 
   fetch(url).then(function(response) {
     response.json().then(function(json){
@@ -65,7 +65,7 @@ router.get('/robots/:id/edit', function(req, res, next) {
       res.render('robots/edit', {
         robot: json,
         title: `Edit Robot ${robotId}`,
-        requestUrl: `${baseUrl}/api/robots/${robotId}`,
+        requestUrl: url,
         requestMethod: "PUT"
       })
     })
