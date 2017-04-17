@@ -16,6 +16,9 @@
       <label for="description">Description</label>
       <textarea id="description" name="description" rows="10" placeholder="Does all the things..."><%= robot.description %></textarea>
       <br>
+      <label for="in-stock">Units in-stock</label>
+      <input id="in-stock" name="in-stock" type="number" placeholder="0" value="<%= robot.in_stock %>">
+      <br>
       <button id="submit" type="submit">Submit</button>
     </form>
 
@@ -26,6 +29,7 @@
 
       var inputName = document.getElementById("name")
       var inputDescription = document.getElementById("description")
+      var inputQuantityInStock = document.getElementById("in-stock")
       var submitButton = document.getElementById("submit")
 
       submitButton.addEventListener("click", submitForm, false)
@@ -33,7 +37,7 @@
       function submitForm(event) {
         event.preventDefault() // prevent duplicate form submission!
 
-        const formData = {name: inputName.value, description: inputDescription.value}
+        const formData = {name: inputName.value, description: inputDescription.value, in_stock: inputQuantityInStock.value}
         console.log("SUBMITTING", formData)
 
         const requestOptions = {

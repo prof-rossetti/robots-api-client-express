@@ -17,7 +17,6 @@ router.get('/robots', function(req, res, next) {
   fetch(endpointUrl).then(function(response) {
     response.json().then(function(json){
       console.log("LISTING ROBOTS", json.length)
-
       res.render('robots/index', {robots: json, title: "Robots List"});
     })
   })
@@ -39,15 +38,15 @@ router.get('/robots/new', function(req, res, next) {
 
 router.get('/robots/:id', function(req, res, next) {
   const robotId = req.params.id
-  const url = `${baseUrl}/api/robots/${robotId}`
+  const endpointUrl = `${baseUrl}/api/robots/${robotId}`
 
-  fetch(url).then(function(response) {
+  fetch(endpointUrl).then(function(response) {
     response.json().then(function(json){
       console.log("SHOWING ROBOT", json)
       res.render('robots/show', {
         robot: json,
         title: `Robot ${robotId}`,
-        requestUrl: url
+        requestUrl: endpointUrl
       })
     })
   })
@@ -57,15 +56,15 @@ router.get('/robots/:id', function(req, res, next) {
 
 router.get('/robots/:id/edit', function(req, res, next) {
   const robotId = req.params.id
-  const url = `${baseUrl}/api/robots/${robotId}`
+  const endpointUrl = `${baseUrl}/api/robots/${robotId}`
 
-  fetch(url).then(function(response) {
+  fetch(endpointUrl).then(function(response) {
     response.json().then(function(json){
       console.log("POPULATING FORM WITH ROBOT", json)
       res.render('robots/edit', {
         robot: json,
         title: `Edit Robot ${robotId}`,
-        requestUrl: url,
+        requestUrl: endpointUrl,
         requestMethod: "PUT"
       })
     })
